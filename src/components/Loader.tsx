@@ -9,7 +9,7 @@ interface LoaderProps {
     videoSrcs?: string[];
 }
 
-const DEFAULT_VIDEOS = ["/loading.mp4", "/loading2.mp4", "/loading3.mp4", "/loading4.mp4"];
+const DEFAULT_VIDEOS = ["/loading.mp4", "/loading2.mp4", "/loading3.mp4", "/loading4.mp4", "/loading5.mp4", "/loading6.mp4"];
 
 const Loader: React.FC<LoaderProps> = ({ message = "Procesando...", videoSrc = "/loading.mp4", videoSrcs }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
