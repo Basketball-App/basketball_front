@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Loading videos (keep only one small default clip in repo)
+src/assets/loading/*
+!src/assets/loading/loading4.mp4
