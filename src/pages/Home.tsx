@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import UploadForm from "../components/UploadForm";
 import VideoPlayer from "../components/VideoPlayer";
+import { TeamPanel, VideoSummaryPanel } from "../components/StatsPanel";
+import type { AnalysisResult } from "../services/video.service";
 import "../styles/Home.css";
 
 const Home: React.FC = () => {
-    const [videoUrl, setVideoUrl] = useState<string | null>(null);
+    const [result, setResult] = useState<AnalysisResult | null>(null);
 
     return (
         <div className="home-container">
@@ -19,13 +21,13 @@ const Home: React.FC = () => {
             </header>
 
             <main className="main-content">
-                {!videoUrl ? (
+                {!result ? (
                     <section className="upload-section">
                         <div className="section-header">
                             <h2>Comienza tu Análisis</h2>
                             <p>Sube un video de basketball y obtén análisis detallado en tiempo real</p>
                         </div>
-                        <UploadForm onUploadComplete={setVideoUrl} />
+                        <UploadForm onUploadComplete={setResult} />
 
                         <div className="features-grid">
                             <div className="feature-card">
@@ -57,13 +59,20 @@ const Home: React.FC = () => {
                             <p>Tu análisis está listo. Revisa los resultados a continuación</p>
                             <button
                                 className="new-analysis-button"
-                                onClick={() => setVideoUrl(null)}
+                                onClick={() => setResult(null)}
                             >
                                 <span>➕</span> Nuevo Análisis
                             </button>
                         </div>
-                        <div className="video-wrapper">
-                            <VideoPlayer src={videoUrl} />
+                        <div className="results-layout">
+                            <TeamPanel stats={result.stats} team={1} />
+                            <div className="video-center-column">
+                                <div className="video-wrapper">
+                                    <VideoPlayer src={result.videoUrl} />
+                                </div>
+                                <VideoSummaryPanel stats={result.stats} />
+                            </div>
+                            <TeamPanel stats={result.stats} team={2} />
                         </div>
                     </section>
                 )}

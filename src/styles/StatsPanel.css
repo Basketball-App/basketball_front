@@ -1,0 +1,313 @@
+.stats-panel {
+    background: var(--bg-wood-light);
+    border: 2px solid var(--secondary-brown-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    animation: fadeIn 0.6s ease-out;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.stats-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.stats-panel::-webkit-scrollbar-thumb {
+    background: var(--secondary-brown-medium);
+    border-radius: 3px;
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    color: var(--primary-orange);
+    margin: 0 0 var(--spacing-md) 0;
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--secondary-brown-medium);
+}
+
+/* Team Cards */
+.team-card {
+    background: var(--bg-wood);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid var(--secondary-brown);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Ball Control Bar */
+.control-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-dark);
+    border-radius: 3px;
+    margin: 4px 0 8px;
+    overflow: hidden;
+}
+
+.control-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease-out;
+}
+
+.team-1-fill {
+    background: linear-gradient(90deg, #FFF0FA, #e8c4d8);
+}
+
+.team-2-fill {
+    background: linear-gradient(90deg, #7B14A2, #a84bd4);
+}
+
+/* Team Events inside side panels */
+.team-events-section {
+    margin-top: var(--spacing-sm);
+}
+
+.section-subtitle {
+    font-size: 0.9rem;
+    color: var(--primary-orange);
+    margin: 0 0 var(--spacing-xs) 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--secondary-brown);
+}
+
+.team-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-wood);
+    font-size: 0.8rem;
+}
+
+.event-time {
+    color: var(--text-muted);
+    font-family: monospace;
+    min-width: 50px;
+}
+
+.event-badge {
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.event-pass .event-badge {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81c784;
+}
+
+.event-interception .event-badge {
+    background: rgba(244, 67, 54, 0.2);
+    color: #e57373;
+}
+
+/* Video Summary Panel (below video) */
+.video-summary-panel {
+    background: var(--bg-wood-light);
+    border: 2px solid var(--secondary-brown-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    animation: fadeIn 0.6s ease-out;
+    flex: 1;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.summary-stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.summary-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--secondary-brown-medium);
+}
+
+.summary-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.download-button,
+.history-button {
+    flex: 1;
+    background: linear-gradient(135deg, var(--secondary-brown-medium) 0%, var(--secondary-brown) 100%);
+    color: white;
+    border: 2px solid var(--secondary-brown-medium);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.download-button {
+    border-color: var(--primary-orange);
+}
+
+.download-button:hover {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-orange-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-orange);
+}
+
+.history-button:hover,
+.history-button.active {
+    border-color: var(--primary-orange);
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-orange-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-orange);
+}
+
+/* Historial (collapsible player table) */
+.history-section {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--secondary-brown-medium);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.player-table-section {
+    margin-bottom: 0;
+}
+
+.table-team-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.team-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.team-1-dot {
+    background: #FFF0FA;
+    border: 1px solid #ccc;
+}
+
+.team-2-dot {
+    background: #7B14A2;
+}
+
+.player-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+
+.player-table thead th {
+    text-align: left;
+    padding: 6px 4px;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--secondary-brown);
+}
+
+.player-table tbody td {
+    padding: 5px 4px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+}
+
+.player-table tbody tr:hover {
+    background: rgba(255, 107, 53, 0.08);
+}
+
+.player-id {
+    font-weight: 600;
+    color: var(--primary-orange);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .stats-panel {
+        max-height: none;
+    }
+
+    .history-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .summary-row {
+        gap: var(--spacing-md);
+    }
+
+    .summary-stat-value {
+        font-size: 1.1rem;
+    }
+
+    .summary-actions {
+        flex-direction: column;
+    }
+}

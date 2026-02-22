@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import { uploadVideo } from "../services/video.service";
+import type { AnalysisResult } from "../services/video.service";
 import Loader from "./Loader";
 import "../styles/UploadForm.css";
 
 interface UploadFormProps {
-    onUploadComplete: (videoUrl: string) => void;
+    onUploadComplete: (result: AnalysisResult) => void;
 }
 
 const UploadForm: React.FC<UploadFormProps> = ({ onUploadComplete }) => {
@@ -79,8 +80,8 @@ const UploadForm: React.FC<UploadFormProps> = ({ onUploadComplete }) => {
         setLoading(true);
         setError(null);
         try {
-            const videoUrl = await uploadVideo(file);
-            onUploadComplete(videoUrl);
+            const result = await uploadVideo(file);
+            onUploadComplete(result);
         } catch (error) {
             console.error("❌ Error al subir el video:", error);
             setError("Error al procesar el video. Por favor intenta de nuevo.");
