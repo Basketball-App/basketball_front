@@ -1,13 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import "../styles/VideoPlayer.css";
 
 interface VideoPlayerProps {
     src: string;
 }
 
+const HIDE_DELAY = 2000;
+
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -16,6 +19,36 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
     const [playbackRate, setPlaybackRate] = useState(1);
     const [showControls, setShowControls] = useState(true);
     const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const resetHideTimer = useCallback(() => {
+        setShowControls(true);
+        if (hideTimer.current) clearTimeout(hideTimer.current);
+        if (isPlaying) {
+            hideTimer.current = setTimeout(() => setShowControls(false), HIDE_DELAY);
+        }
+    }, [isPlaying]);
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const onMove = () => resetHideTimer();
+
+        container.addEventListener("mousemove", onMove);
+        return () => {
+            container.removeEventListener("mousemove", onMove);
+            if (hideTimer.current) clearTimeout(hideTimer.current);
+        };
+    }, [resetHideTimer]);
+
+    useEffect(() => {
+        if (!isPlaying) {
+            if (hideTimer.current) clearTimeout(hideTimer.current);
+            setShowControls(true);
+        } else {
+            resetHideTimer();
+        }
+    }, [isPlaying, resetHideTimer]);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -138,10 +171,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
 
     return (
         <div
-            className={`video-player-container ${isFullscreen ? "fullscreen" : ""}`}
+            className={`video-player-container ${isFullscreen ? "fullscreen" : ""} ${!showControls ? "hide-cursor" : ""}`}
             ref={containerRef}
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => setShowControls(isPlaying ? false : true)}
         >
             <video
                 ref={videoRef}
