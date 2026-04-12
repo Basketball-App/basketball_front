@@ -38,7 +38,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
         return () => {
             container.removeEventListener("mousemove", onMove);
             if (hideTimer.current) clearTimeout(hideTimer.current);
-        };
+        }; 
     }, [resetHideTimer]);
 
     useEffect(() => {

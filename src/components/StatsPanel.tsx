@@ -22,7 +22,6 @@ interface TeamPanelProps {
 export const TeamPanel: React.FC<TeamPanelProps> = ({ stats, team }) => {
     const teamData = team === 1 ? stats.teams.team_1 : stats.teams.team_2;
     const teamEvents = stats.events.filter((e) => e.team === team);
-    const dotClass = team === 1 ? "team-1-dot" : "team-2-dot";
     const fillClass = team === 1 ? "team-1-fill" : "team-2-fill";
 
     return (
